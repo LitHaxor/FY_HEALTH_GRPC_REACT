@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/finalcial_health/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/finalcial_health/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/finalcial_health",
+  "projects": {
+    "finalcial_health": {
+      "type": "application",
+      "root": "apps/finalcial_health",
+      "entryFile": "main",
+      "sourceRoot": "apps/finalcial_health/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/finalcial_health/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    },
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    },
+    "calculation": {
+      "type": "application",
+      "root": "apps/calculation",
+      "entryFile": "main",
+      "sourceRoot": "apps/calculation/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/calculation/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    },
+    "user": {
+      "type": "application",
+      "root": "apps/user",
+      "entryFile": "main",
+      "sourceRoot": "apps/user/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    }
+  }
+}

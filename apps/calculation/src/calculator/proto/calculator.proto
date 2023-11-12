@@ -1,0 +1,20 @@
+// calculator.proto
+
+syntax = "proto3";
+
+package calculator;
+
+service CalculatorService {
+    rpc FinancialCalculator(FinancialRequest) returns (FinancialResponse) {}
+}
+
+message FinancialRequest {
+    double monthlyIncome = 1;
+    double expenses = 2;
+    double debts = 3;
+    double assets = 4;
+}
+
+message FinancialResponse {
+    double result = 1;
+}
