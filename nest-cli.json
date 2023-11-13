@@ -5,6 +5,7 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
+    "assets": ["**/*.proto"],
     "tsConfigPath": "apps/financial_health/tsconfig.app.json"
   },
   "monorepo": true,
@@ -39,8 +40,8 @@
       "sourceRoot": "apps/calculation/src",
       "compilerOptions": {
         "tsConfigPath": "apps/calculation/tsconfig.app.json",
-        "assets": ["**/*.proto"],
-        "watchAssets": true
+        "watchAssets": true,
+        "assets": ["**/*.proto"]
       }
     },
     "user": {

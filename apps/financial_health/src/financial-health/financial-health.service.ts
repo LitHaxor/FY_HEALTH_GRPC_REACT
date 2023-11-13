@@ -11,7 +11,7 @@ export class FinancialHealthService {
     @InjectRepository(FinancialHealth)
     private readonly financialHealthRepository: Repository<FinancialHealth>,
   ) {}
-  create(createFinancialHealthDto: CreateFinancialHealthDto) {
+  CreateFinancialHealth(createFinancialHealthDto: CreateFinancialHealthDto) {
     const financialHealth = this.financialHealthRepository.create(
       createFinancialHealthDto,
     );

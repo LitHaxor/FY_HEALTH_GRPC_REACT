@@ -9,8 +9,10 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        package: 'financialHealth',
-        protoPath: join(__dirname, 'proto/financial-health.proto'),
+        package: 'financialhealth',
+        // protoPath: join(__dirname, '/proto/financial_health.proto'),
+        protoPath:
+          '/Users/lithasan/Desktop/Projects/FY_Health/finalcial_health/apps/financial_health/src/proto/financial_health.proto',
       },
     },
   );

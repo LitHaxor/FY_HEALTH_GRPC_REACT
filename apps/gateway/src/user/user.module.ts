@@ -8,16 +8,16 @@ import { join } from 'path';
   imports: [
     ClientsModule.register([
       {
-        name: 'USER_PACKAGE',
+        name: 'USERS_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          package: 'user',
-          protoPath: join(__dirname, 'proto/user.proto'),
+          package: 'users',
+          loader: { keepCase: true },
+          protoPath: join(__dirname + '/user/proto/users.proto'),
         },
       },
     ]),
   ],
-
   controllers: [UserController],
   providers: [UserService],
 })

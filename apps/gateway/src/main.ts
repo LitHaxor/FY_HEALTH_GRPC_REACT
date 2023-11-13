@@ -16,13 +16,13 @@ async function bootstrap() {
     }),
   );
 
-  // Documentations
-  const options = new DocumentBuilder()
-    .setTitle('')
+  const config = new DocumentBuilder()
+    .setTitle('Financial Health Calculator')
     .setDescription('')
-    .setBasePath('api')
+    .setVersion('1.0')
+    .addTag('cats')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
+  const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(3000);

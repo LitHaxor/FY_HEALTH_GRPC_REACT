@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CalculatorService } from './calculator.service';
 import { CalculatorController } from './calculator.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import path from 'path';
+import path, { join } from 'path';
 
 @Module({
   imports: [
@@ -13,8 +13,7 @@ import path from 'path';
         options: {
           package: 'calculator',
           loader: { keepCase: true },
-          protoPath:
-            '/Users/lithasan/Desktop/Projects/FY_Health/finalcial_health/apps/gateway/src/calculator/proto/calculator.proto',
+          protoPath: join(__dirname + '/calculator/proto/calculator.proto'),
         },
       },
     ]),

@@ -1,26 +1,37 @@
-import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { UserService } from '../user/user.service';
+import { UsersService as UserGrpcClient } from 'apps/user/src/users/users.service';
+import { ClientGrpc } from '@nestjs/microservices';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  private userGrpcClient: UserGrpcClient;
+
+  constructor(@Inject('USER_PACKAGE') private client?: ClientGrpc) {}
+
+  onModuleInit() {
+    this.userGrpcClient =
+      this.client.getService<UserGrpcClient>('UsersService');
+  }
   async register(registerDto: RegisterDto) {
-    const response = await this.userService.create(registerDto);
+    const response = await this.userGrpcClient.CreateUser(registerDto);
     if ((response as any)?.status === HttpStatus.CONFLICT) {
       throw new ConflictException((response as any)?.message);
     }
-
     if (response) {
       return response;
     } else {
       return null;
     }
   }
-
   async login(loginDto: LoginDto) {
-    const user = this.userService.getUserAuth(loginDto);
+    const user = await this.userGrpcClient.GetAuthUser(loginDto);
     if (user) {
       return user;
     } else {

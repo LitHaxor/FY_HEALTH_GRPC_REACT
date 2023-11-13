@@ -1,19 +1,17 @@
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { Global, Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService as UserGrpcClient } from 'apps/user/src/users/users.service';
-import { LoginDto } from '../auth/dto/login.dto';
 import { ClientGrpc } from '@nestjs/microservices';
 
+@Global()
 @Injectable()
 export class UserService implements OnModuleInit {
-  private userGrpcClient: UserGrpcClient;
+  private userGrpcClient: any;
 
-  constructor(@Inject('USER_PACKAGE') private readonly client: ClientGrpc) {}
+  constructor(@Inject('USERS_PACKAGE') private client?: ClientGrpc) {}
 
   onModuleInit() {
-    this.userGrpcClient =
-      this.client.getService<UserGrpcClient>('UsersService');
+    this.userGrpcClient = this.client.getService<any>('UsersService');
   }
 
   create(createUserDto: CreateUserDto) {
@@ -34,9 +32,5 @@ export class UserService implements OnModuleInit {
 
   remove(id: number) {
     return this.userGrpcClient.RemoveUser(id);
-  }
-
-  getUserAuth(loginDto: LoginDto) {
-    return this.userGrpcClient.GetAuthUser(loginDto);
   }
 }

@@ -12,7 +12,9 @@ export class FinancialHealthController {
 
   @GrpcMethod('FinancialHealthService', 'CreateFinancialHealth')
   create(@Payload() createFinancialHealthDto: CreateFinancialHealthDto) {
-    return this.financialHealthService.create(createFinancialHealthDto);
+    return this.financialHealthService.CreateFinancialHealth(
+      createFinancialHealthDto,
+    );
   }
 
   @GrpcMethod('FinancialHealthService', 'FindAllFinancialHealth')

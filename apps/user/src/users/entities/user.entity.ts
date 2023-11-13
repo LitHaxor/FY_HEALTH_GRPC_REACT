@@ -15,7 +15,9 @@ export enum UserRole {
   ADMIN = 'ADMIN',
 }
 
-@Entity()
+@Entity({
+  name: 'users',
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -33,8 +35,9 @@ export class User {
 
   @Column({
     default: USER_ROLE.USER,
+    enum: USER_ROLE,
   })
-  userRole: USER_ROLE;
+  userRole: string;
 
   @CreateDateColumn()
   createdAt: Date;

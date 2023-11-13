@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { FinalcialHealthService } from './finalcial_health.service';
-import { CreateFinalcialHealthDto } from './dto/create-finalcial_health.dto';
+import { CreateFinancialHealthDto } from './dto/create-finalcial_health.dto';
 import { UpdateFinalcialHealthDto } from './dto/update-finalcial_health.dto';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -20,7 +20,7 @@ export class FinalcialHealthController {
   ) {}
 
   @Post()
-  create(@Body() createFinalcialHealthDto: CreateFinalcialHealthDto) {
+  create(@Body() createFinalcialHealthDto: CreateFinancialHealthDto) {
     return this.finalcialHealthService.create(createFinalcialHealthDto);
   }
 

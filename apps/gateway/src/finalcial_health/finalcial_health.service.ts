@@ -1,11 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateFinalcialHealthDto } from './dto/create-finalcial_health.dto';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { CreateFinancialHealthDto } from './dto/create-finalcial_health.dto';
 import { UpdateFinalcialHealthDto } from './dto/update-finalcial_health.dto';
+import { FinancialHealthService as FinancialHealthGrpc } from 'apps/financial_health/src/financial-health/financial-health.service';
+import { ClientGrpc } from '@nestjs/microservices';
 
 @Injectable()
-export class FinalcialHealthService {
-  create(createFinalcialHealthDto: CreateFinalcialHealthDto) {
-    return 'This action adds a new finalcialHealth';
+export class FinalcialHealthService implements OnModuleInit {
+  private financialHealthGrpcService: FinancialHealthGrpc;
+
+  constructor(
+    @Inject('FINANCIAL_HEALTH_PACKAGE') private client?: ClientGrpc,
+  ) {}
+
+  onModuleInit() {
+    this.financialHealthGrpcService =
+      this.client.getService<FinancialHealthGrpc>('FinancialHealthService');
+  }
+
+  create(createFinalcialHealthDto: CreateFinancialHealthDto) {
+    return this.financialHealthGrpcService.CreateFinancialHealth(
+      createFinalcialHealthDto,
+    );
   }
 
   findAll() {

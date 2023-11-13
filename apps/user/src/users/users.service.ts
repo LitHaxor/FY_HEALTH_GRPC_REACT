@@ -12,8 +12,8 @@ export class UsersService {
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
   ) {}
 
-  CreateUser(createUserDto: CreateUserDto) {
-    const existingUser = this.usersRepository.findOne({
+  async CreateUser(createUserDto: CreateUserDto) {
+    const existingUser = await this.usersRepository.findOne({
       where: {
         email: createUserDto.email,
       },
@@ -25,6 +25,7 @@ export class UsersService {
         message: 'User with this email already exists',
       };
     }
+
     const user = this.usersRepository.create(createUserDto);
     return this.usersRepository.save(user);
   }

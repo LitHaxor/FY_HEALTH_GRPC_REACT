@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package users;
+import "google/protobuf/timestamp.proto";
 
 message CreateUserRequest {
   string name = 1;
@@ -15,6 +16,8 @@ message CreateUserResponse {
   string userRole = 4;
   google.protobuf.Timestamp createdAt = 5;
   google.protobuf.Timestamp updatedAt = 6;
+  string status = 7;
+  string message = 8;
 }
 
 message FindAllUsersRequest {}

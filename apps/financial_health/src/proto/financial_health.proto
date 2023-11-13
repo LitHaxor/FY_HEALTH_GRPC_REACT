@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
 package financialhealth;
 
 message FinancialHealth {
@@ -9,7 +12,7 @@ message FinancialHealth {
   double debts = 4;
   double assets = 5;
   int32 userId = 6;
-  double score = 7;
+  int32 score = 7;
   google.protobuf.Timestamp createdAt = 8;
   google.protobuf.Timestamp updatedAt = 9;
 }
@@ -20,6 +23,7 @@ message CreateFinancialHealthRequest {
   double debts = 3;
   double assets = 4;
   int32 userId = 5;
+  int32 score = 6;
 }
 
 message FindOneFinancialHealthRequest {
@@ -40,10 +44,15 @@ message RemoveFinancialHealthRequest {
   int32 id = 1;
 }
 
+message NoContent {
+  int32 status = 1;
+}
+
+
 service FinancialHealthService {
   rpc CreateFinancialHealth (CreateFinancialHealthRequest) returns (FinancialHealth);
-  rpc FindAllFinancialHealth (google.protobuf.Empty) returns (repeated FinancialHealth);
+  rpc FindAllFinancialHealth (NoContent) returns (FinancialHealth);
   rpc FindOneFinancialHealth (FindOneFinancialHealthRequest) returns (FinancialHealth);
   rpc UpdateFinancialHealth (UpdateFinancialHealthRequest) returns (FinancialHealth);
-  rpc RemoveFinancialHealth (RemoveFinancialHealthRequest) returns (google.protobuf.Empty);
+  rpc RemoveFinancialHealth (RemoveFinancialHealthRequest) returns (NoContent);
 }
