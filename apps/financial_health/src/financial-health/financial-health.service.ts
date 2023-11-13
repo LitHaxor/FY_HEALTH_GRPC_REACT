@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFinancialHealthDto } from './dto/create-financial-health.dto';
 import { UpdateFinancialHealthDto } from './dto/update-financial-health.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FinancialHealth } from './entities/financial-health.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FinancialHealthService {
+  constructor(
+    @InjectRepository(FinancialHealth)
+    private readonly financialHealthRepository: Repository<FinancialHealth>,
+  ) {}
   create(createFinancialHealthDto: CreateFinancialHealthDto) {
-    return 'This action adds a new financialHealth';
+    const financialHealth = this.financialHealthRepository.create(
+      createFinancialHealthDto,
+    );
+    return this.financialHealthRepository.save(financialHealth);
   }
 
   findAll() {
-    return `This action returns all financialHealth`;
+    return this.financialHealthRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} financialHealth`;
+    return this.financialHealthRepository.findOne({
+      where: { id },
+    });
   }
 
   update(id: number, updateFinancialHealthDto: UpdateFinancialHealthDto) {
-    return `This action updates a #${id} financialHealth`;
+    return this.financialHealthRepository.update(
+      { id },
+      updateFinancialHealthDto,
+    );
   }
 
   remove(id: number) {
-    return `This action removes a #${id} financialHealth`;
+    return this.financialHealthRepository.delete({ id });
   }
 }

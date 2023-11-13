@@ -19,5 +19,5 @@ export class RegisterDto {
   @IsNotEmpty()
   @IsString()
   @IsEnum(USER_ROLE)
-  role: USER_ROLE;
+  userRole: USER_ROLE;
 }

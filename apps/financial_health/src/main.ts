@@ -10,10 +10,7 @@ async function bootstrap() {
       transport: Transport.GRPC,
       options: {
         package: 'financialHealth',
-        protoPath: join(__dirname, '..' + 'proto/calculator.proto'),
-        loader: {
-          includeDirs: [join(__dirname, '..' + 'proto')],
-        },
+        protoPath: join(__dirname, 'proto/financial-health.proto'),
       },
     },
   );

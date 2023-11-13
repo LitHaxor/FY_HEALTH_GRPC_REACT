@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { GrpcMethod, Payload } from '@nestjs/microservices';
 import { FinancialHealthService } from './financial-health.service';
 import { CreateFinancialHealthDto } from './dto/create-financial-health.dto';
 import { UpdateFinancialHealthDto } from './dto/update-financial-health.dto';
@@ -10,22 +10,22 @@ export class FinancialHealthController {
     private readonly financialHealthService: FinancialHealthService,
   ) {}
 
-  @MessagePattern('createFinancialHealth')
+  @GrpcMethod('FinancialHealthService', 'CreateFinancialHealth')
   create(@Payload() createFinancialHealthDto: CreateFinancialHealthDto) {
     return this.financialHealthService.create(createFinancialHealthDto);
   }
 
-  @MessagePattern('findAllFinancialHealth')
+  @GrpcMethod('FinancialHealthService', 'FindAllFinancialHealth')
   findAll() {
     return this.financialHealthService.findAll();
   }
 
-  @MessagePattern('findOneFinancialHealth')
+  @GrpcMethod('FinancialHealthService', 'findOneFinancialHealth')
   findOne(@Payload() id: number) {
     return this.financialHealthService.findOne(id);
   }
 
-  @MessagePattern('updateFinancialHealth')
+  @GrpcMethod('FinancialHealthService', 'updateFinancialHealth')
   update(@Payload() updateFinancialHealthDto: UpdateFinancialHealthDto) {
     return this.financialHealthService.update(
       updateFinancialHealthDto.id,
@@ -33,7 +33,7 @@ export class FinancialHealthController {
     );
   }
 
-  @MessagePattern('removeFinancialHealth')
+  @GrpcMethod('FinancialHealthService', 'removeFinancialHealth')
   remove(@Payload() id: number) {
     return this.financialHealthService.remove(id);
   }

@@ -1,35 +1,46 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { GrpcMethod, Payload } from '@nestjs/microservices';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { LoginDto } from 'apps/gateway/src/auth/dto/login.dto';
 
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @MessagePattern('createUser')
+  @GrpcMethod('UsersService', 'CreateUser')
   create(@Payload() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    return this.usersService.CreateUser(createUserDto);
   }
 
-  @MessagePattern('findAllUsers')
+  @GrpcMethod('UsersService', 'FindAllUsers')
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.FindAllUsers();
   }
 
-  @MessagePattern('findOneUser')
+  @GrpcMethod('UsersService', 'FindOneUser')
   findOne(@Payload() id: number) {
-    return this.usersService.findOne(id);
+    return this.usersService.FindOneUser(id);
   }
 
-  @MessagePattern('updateUser')
+  @GrpcMethod('UsersService', 'UpdateUser')
   update(@Payload() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto.id, updateUserDto);
+    return this.usersService.UpdateUser(updateUserDto.id, updateUserDto);
   }
 
-  @MessagePattern('removeUser')
+  @GrpcMethod('UsersService', 'RemoveUser')
   remove(@Payload() id: number) {
-    return this.usersService.remove(id);
+    return this.usersService.RemoveUser(id);
+  }
+
+  @GrpcMethod('UsersService', 'GetUserByEmail')
+  getUserByEmail(@Payload() email: string) {
+    return this.usersService.getUserByEmail(email);
+  }
+
+  @GrpcMethod('UserService', 'GetAuthUser')
+  getAuthUser(@Payload() id: LoginDto) {
+    return this.usersService.GetAuthUser(id);
   }
 }

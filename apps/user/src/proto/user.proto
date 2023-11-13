@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package users;
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message CreateUserResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string userRole = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+}
+
+message FindAllUsersRequest {}
+
+message FindAllUsersResponse {
+  repeated User users = 1;
+}
+
+message FindOneUserRequest {
+  int32 id = 1;
+}
+
+message FindOneUserResponse {
+  User user = 1;
+}
+
+message UpdateUserRequest {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message UpdateUserResponse {
+  User user = 1;
+}
+
+message RemoveUserRequest {
+  int32 id = 1;
+}
+
+message RemoveUserResponse {}
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  string userRole = 5;
+  google.protobuf.Timestamp createdAt = 6;
+  google.protobuf.Timestamp updatedAt = 7;
+}
+
+message LoginDto {
+  string email = 1;
+  string password = 2;
+}
+
+service UsersService {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+  rpc FindAllUsers (FindAllUsersRequest) returns (FindAllUsersResponse);
+  rpc FindOneUser (FindOneUserRequest) returns (FindOneUserResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+  rpc RemoveUser (RemoveUserRequest) returns (RemoveUserResponse);
+  rpc GetAuthUser(LoginDto) returns (User);
+}
