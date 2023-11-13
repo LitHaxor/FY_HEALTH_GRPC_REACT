@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package financialhealth;
+
+message FinancialHealth {
+  int32 id = 1;
+  double monthlyIncome = 2;
+  double expenses = 3;
+  double debts = 4;
+  double assets = 5;
+  int32 userId = 6;
+  double score = 7;
+  google.protobuf.Timestamp createdAt = 8;
+  google.protobuf.Timestamp updatedAt = 9;
+}
+
+message CreateFinancialHealthRequest {
+  double monthlyIncome = 1;
+  double expenses = 2;
+  double debts = 3;
+  double assets = 4;
+  int32 userId = 5;
+}
+
+message FindOneFinancialHealthRequest {
+  int32 id = 1;
+}
+
+message UpdateFinancialHealthRequest {
+  int32 id = 1;
+  double monthlyIncome = 2;
+  double expenses = 3;
+  double debts = 4;
+  double assets = 5;
+  int32 userId = 6;
+  double score = 7;
+}
+
+message RemoveFinancialHealthRequest {
+  int32 id = 1;
+}
+
+service FinancialHealthService {
+  rpc CreateFinancialHealth (CreateFinancialHealthRequest) returns (FinancialHealth);
+  rpc FindAllFinancialHealth (google.protobuf.Empty) returns (repeated FinancialHealth);
+  rpc FindOneFinancialHealth (FindOneFinancialHealthRequest) returns (FinancialHealth);
+  rpc UpdateFinancialHealth (UpdateFinancialHealthRequest) returns (FinancialHealth);
+  rpc RemoveFinancialHealth (RemoveFinancialHealthRequest) returns (google.protobuf.Empty);
+}

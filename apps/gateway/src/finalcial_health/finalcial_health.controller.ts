@@ -10,7 +10,9 @@ import {
 import { FinalcialHealthService } from './finalcial_health.service';
 import { CreateFinalcialHealthDto } from './dto/create-finalcial_health.dto';
 import { UpdateFinalcialHealthDto } from './dto/update-finalcial_health.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Financial Health')
 @Controller('finalcial-health')
 export class FinalcialHealthController {
   constructor(

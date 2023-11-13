@@ -5,7 +5,7 @@ syntax = "proto3";
 package calculator;
 
 service CalculatorService {
-    rpc FinancialCalculator(FinancialRequest) returns (FinancialResponse) {}
+    rpc financialCalculator(FinancialRequest) returns (FinancialResponse) {}
 }
 
 message FinancialRequest {
@@ -16,5 +16,6 @@ message FinancialRequest {
 }
 
 message FinancialResponse {
-    double result = 1;
+    double score = 1;
+    double scorePercentage = 2;
 }

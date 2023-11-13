@@ -1,22 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/finalcial_health/src",
+  "sourceRoot": "apps/financial_health/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/finalcial_health/tsconfig.app.json"
+    "tsConfigPath": "apps/financial_health/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/finalcial_health",
+  "root": "apps/financial_health",
   "projects": {
-    "finalcial_health": {
+    "financial_health": {
       "type": "application",
-      "root": "apps/finalcial_health",
+      "root": "apps/financial_health",
       "entryFile": "main",
-      "sourceRoot": "apps/finalcial_health/src",
+      "sourceRoot": "apps/financial_health/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/finalcial_health/tsconfig.app.json",
+        "tsConfigPath": "apps/financial_health/tsconfig.app.json",
         "assets": ["**/*.proto"],
         "watchAssets": true
       }
